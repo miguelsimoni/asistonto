@@ -106,7 +106,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
-    <None Include="Resources\exit.png" />
+    <None Include="Resources\icon-web.png" />
+    <None Include="Resources\icon-exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

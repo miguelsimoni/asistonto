@@ -61,12 +61,67 @@ namespace asistonto.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to notepad.
+        /// </summary>
+        internal static string externalEditor {
+            get {
+                return ResourceManager.GetString("externalEditor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Exit {
+        internal static System.Drawing.Bitmap iconExit {
             get {
-                object obj = ResourceManager.GetObject("Exit", resourceCulture);
+                object obj = ResourceManager.GetObject("iconExit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconWeb {
+            get {
+                object obj = ResourceManager.GetObject("iconWeb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit....
+        /// </summary>
+        internal static string menuEdit {
+            get {
+                return ResourceManager.GetString("menuEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string menuExit {
+            get {
+                return ResourceManager.GetString("menuExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web....
+        /// </summary>
+        internal static string menuWeb {
+            get {
+                return ResourceManager.GetString("menuWeb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://miguelsimoni.xyz.
+        /// </summary>
+        internal static string productWebsite {
+            get {
+                return ResourceManager.GetString("productWebsite", resourceCulture);
             }
         }
     }
