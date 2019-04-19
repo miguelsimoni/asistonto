@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -103,14 +103,17 @@ namespace asistonto
                     }
                     else
                     {
-                        if(Regex.Match(item, PATTERN_URL).Success)
+                        string itemDo = String.Empty;
+                        if(item.StartsWith("do:"))
                         {
-                            menuItem = new ToolStripMenuItem(item, Properties.Resources.iconWeb, new EventHandler(genericToolStripMenuItem_Click));
+                            itemDo = item.Remove(0, 3);
                         }
-                        else
+                        Image icon = null;
+                        if(Regex.Match(item, PATTERN_URL).Success || Regex.Match(itemDo, PATTERN_URL).Success)
                         {
-                            menuItem = new ToolStripMenuItem(item, null, new EventHandler(genericToolStripMenuItem_Click));
+                            icon = Properties.Resources.iconWeb;
                         }
+                        menuItem = new ToolStripMenuItem(item, icon, new EventHandler(genericToolStripMenuItem_Click));
                     }
                     if (!contextMenuStrip.Items.Contains(menuItem))
                     {
@@ -130,48 +133,52 @@ namespace asistonto
 
         private static void doAction(string value)
         {
-            if (Regex.Match(value, PATTERN_URL).Success)
+            if(value.StartsWith("do:"))
             {
-                try
+                value = value.Remove(0,3);
+                if (Regex.Match(value, PATTERN_URL).Success)
                 {
-                    Process.Start(value);
+                    try
+                    {
+                        Process.Start(value);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Invalid URL." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception ex)
+                if (Regex.Match(value, PATTERN_MAILTO).Success)
                 {
-                    MessageBox.Show("Invalid URL." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        Process.Start(value);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Invalid e-mail." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-            }
-            if (Regex.Match(value, PATTERN_MAILTO).Success)
-            {
-                try
+                if (Regex.Match(value, PATTERN_NETWORK_ADDRESS).Success)
                 {
-                    Process.Start(value);
+                    try
+                    {
+                        Process.Start(value);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Invalid network address." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception ex)
+                if (Regex.Match(value, PATTERN_LOCAL_PATH).Success)
                 {
-                    MessageBox.Show("Invalid e-mail." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            if (Regex.Match(value, PATTERN_NETWORK_ADDRESS).Success)
-            {
-                try
-                {
-                    Process.Start(value);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Invalid network address." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            if (Regex.Match(value, PATTERN_LOCAL_PATH).Success)
-            {
-                try
-                {
-                    Process.Start(value);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Invalid local path." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        Process.Start(value);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Invalid local path." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             else
