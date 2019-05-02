@@ -27,7 +27,9 @@ namespace asistonto
             this.fileSystemWatcher.Filter = Properties.Settings.Default.dataFile;
 
             if (!File.Exists(dataFile))
+            {
                 File.CreateText(dataFile).Close();
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -58,7 +60,10 @@ namespace asistonto
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if(MessageBox.Show("Do you want to exit " + Application.ProductName + "?", Properties.Resources.menuExit, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void genericToolStripMenuItem_Click(object sender, EventArgs e)

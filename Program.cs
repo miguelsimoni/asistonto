@@ -14,9 +14,15 @@ namespace asistonto
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new mainForm());
+            if (System.Diagnostics.Process.GetProcessesByName(Application.ProductName).Length == 1)
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new mainForm());
+            } else
+            {
+                MessageBox.Show(Application.ProductName + " is already running here!", "No more...", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1);
+            }
         }
     }
 }
