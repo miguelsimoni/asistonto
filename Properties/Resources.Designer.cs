@@ -117,7 +117,7 @@ namespace asistonto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://miguelsimoni.xyz.
+        ///   Looks up a localized string similar to https://miguelsimoni.xyz/project/asistonto/.
         /// </summary>
         internal static string productWebsite {
             get {

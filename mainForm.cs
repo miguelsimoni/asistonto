@@ -21,7 +21,11 @@ namespace asistonto
         {
             InitializeComponent();
 
-            this.notifyIcon.Text = Application.ProductName + " v" + Application.ProductVersion;
+            lblProduct.Text = Application.ProductName;
+            lblVersion.Text = Application.ProductVersion;
+            lblCreator.Text = Application.CompanyName;
+
+            this.notifyIcon.Text = string.Concat(Application.ProductName, " v", Application.ProductVersion);
 
             this.fileSystemWatcher.Path = Application.StartupPath;
             this.fileSystemWatcher.Filter = Properties.Settings.Default.dataFile;
@@ -60,7 +64,8 @@ namespace asistonto
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Do you want to exit " + Application.ProductName + "?", Properties.Resources.menuExit, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            string msg = string.Concat("Do you want to exit ", Application.ProductName, "?");
+            if (MessageBox.Show(msg, Properties.Resources.menuExit, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 Application.Exit();
             }
@@ -149,7 +154,8 @@ namespace asistonto
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Invalid URL." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        string err = string.Concat("Invalid URL.", Environment.NewLine, ex.Message);
+                        MessageBox.Show(err, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 if (Regex.Match(value, PATTERN_MAILTO).Success)
@@ -160,7 +166,8 @@ namespace asistonto
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Invalid e-mail." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        string err = string.Concat("Invalid e-mail.", Environment.NewLine, ex.Message);
+                        MessageBox.Show(err, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 if (Regex.Match(value, PATTERN_NETWORK_ADDRESS).Success)
@@ -171,7 +178,8 @@ namespace asistonto
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Invalid network address." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        string err = string.Concat("Invalid network address.", Environment.NewLine, ex.Message);
+                        MessageBox.Show(err, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 if (Regex.Match(value, PATTERN_LOCAL_PATH).Success)
@@ -182,7 +190,8 @@ namespace asistonto
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Invalid local path." + Environment.NewLine + ex.Message, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        string err = string.Concat("Invalid local path.", Environment.NewLine, ex.Message);
+                        MessageBox.Show(err, "oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
