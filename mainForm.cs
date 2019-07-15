@@ -105,7 +105,16 @@ namespace asistonto
                             menuItem = new ToolStripMenuItem(submenu);
                         }
                         item = item.Substring(item.IndexOf("|") + 1);
-                        ((ToolStripMenuItem)menuItem).DropDownItems.Add(new ToolStripMenuItem(item, null, new EventHandler(genericToolStripMenuItem_Click)));
+                        ToolStripItem submenuItem = null;
+                        if (item == "-")
+                        {
+                            submenuItem = new ToolStripSeparator();
+                        }
+                        else
+                        {
+                            submenuItem = new ToolStripMenuItem(item, null, new EventHandler(genericToolStripMenuItem_Click));
+                        }
+                        ((ToolStripMenuItem)menuItem).DropDownItems.Add(submenuItem);
                     }
                     else if (item == "-")
                     {
